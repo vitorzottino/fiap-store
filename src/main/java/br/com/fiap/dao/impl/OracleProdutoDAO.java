@@ -23,7 +23,7 @@ public class OracleProdutoDAO implements ProdutoDAO {
 		PreparedStatement stmt = null;
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
-			String sql = "INSERT INTO TB_PRODUTOS (NOME_PRODUTO, QUANTIDADE, VALOR, DT_FABRICACAO, ID_CATEGORIA) VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO PRODUTOS (NOME, QUANTIDADE, VALOR, DT_FABRICACAO, CATEGORIA) VALUES (?, ?, ?, ?, ?)";
 			stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, produto.getNome());
 			stmt.setInt(2, produto.getQuantidade());
@@ -31,10 +31,10 @@ public class OracleProdutoDAO implements ProdutoDAO {
 			java.sql.Date data = new java.sql.Date(produto.getDataFabricacao().getTimeInMillis());
 			stmt.setDate(4, data);
 			stmt.setInt(5, produto.getCategoria().getCodigo());
-			stmt.execute();
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DBException("Erro ao cadastrar.");
+			throw new DBException("Erro ao cadastradar.");
 		} finally {
 			try {
 				stmt.close();
@@ -51,7 +51,7 @@ public class OracleProdutoDAO implements ProdutoDAO {
 
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
-			String sql = "UPDATE TB_PRODUTOS SET NOME_PRODUTO = ?, QUANTIDADE = ?, VALOR = ?, DT_FABRICACAO = ?, ID_CATEGORIA = ? WHERE ID_PRODUTO = ?";
+			String sql = "UPDATE PRODUTOS SET NOME = ?, QUANTIDADE = ?, VALOR = ?, DT_FABRICACAO = ?, CATEGORIA = ? WHERE CODIGO = ?";
 			stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, produto.getNome());
 			stmt.setInt(2, produto.getQuantidade());
@@ -61,7 +61,7 @@ public class OracleProdutoDAO implements ProdutoDAO {
 			stmt.setInt(5, produto.getCategoria().getCodigo());
 			stmt.setInt(6, produto.getCodigo());
 
-			stmt.execute();
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException("Erro ao atualizar.");
@@ -80,10 +80,10 @@ public class OracleProdutoDAO implements ProdutoDAO {
 		PreparedStatement stmt = null;
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
-			String sql = "DELETE FROM TB_PRODUTOS WHERE ID_PRODUTO = ?";
+			String sql = "DELETE FROM PRODUTOS WHERE CODIGO = ?";
 			stmt = conexao.prepareStatement(sql);
 			stmt.setInt(1, codigo);
-			stmt.execute();
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException("Erro ao remover.");
@@ -105,25 +105,24 @@ public class OracleProdutoDAO implements ProdutoDAO {
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
 			stmt = conexao.prepareStatement(
-					"SELECT * FROM TB_PRODUTOS INNER JOIN TB_CATEGORIAS ON TB_PRODUTOS.ID_CATEGORIA = TB_CATEGORIAS.ID_CATEGORIA WHERE TB_PRODUTOS.ID_PRODUTO = ?");
+					"SELECT * FROM PRODUTOS INNER JOIN TB_CATEGORIA ON PRODUTOS.CATEGORIA = TB_CATEGORIA.CODIGO WHERE PRODUTOS.CODIGO = ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				int codigo = rs.getInt("ID_PRODUTO");
-				String nome = rs.getString("NOME_PRODUTO");
+				int codigo = rs.getInt("CODIGO");
+				String nome = rs.getString("NOME");
 				int qtd = rs.getInt("QUANTIDADE");
 				double valor = rs.getDouble("VALOR");
 				java.sql.Date data = rs.getDate("DT_FABRICACAO");
 				Calendar dataFabricacao = Calendar.getInstance();
 				dataFabricacao.setTimeInMillis(data.getTime());
-				int codigoCategoria = rs.getInt("ID_CATEGORIA");
-				String nomeCategoria = rs.getString("NOME_CATEGORIA");
+				int codigoCategoria = rs.getInt("CATEGORIA");
+				String nomeCategoria = rs.getString("TB_CATEGORIA.NOME");
 
-				produto = new Produto(nome, valor, dataFabricacao, qtd);
+				produto = new Produto(codigo, nome, valor, dataFabricacao, qtd);
 				Categoria categoria = new Categoria(codigoCategoria, nomeCategoria);
 				produto.setCategoria(categoria);
-				produto.setCodigo(codigo);
 			}
 
 		} catch (SQLException e) {
@@ -148,24 +147,24 @@ public class OracleProdutoDAO implements ProdutoDAO {
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
 			stmt = conexao.prepareStatement(
-					"SELECT * FROM TB_PRODUTOS INNER JOIN TB_CATEGORIAS ON TB_PRODUTOS.ID_CATEGORIA = TB_CATEGORIAS.ID_CATEGORIA");
+					"SELECT P.CODIGO, P.NOME AS PRODUTO, VALOR, DT_FABRICACAO, QUANTIDADE, CATEGORIA, C.NOME FROM PRODUTOS P INNER JOIN TB_CATEGORIA C ON P.CATEGORIA = C.CODIGO");
 			rs = stmt.executeQuery();
 
+			// Percorre todos os registros encontrados
 			while (rs.next()) {
-				int codigo = rs.getInt("ID_PRODUTO");
-				String nome = rs.getString("NOME_PRODUTO");
-				int qtd = rs.getInt("QUANTIDADE");
-				double valor = rs.getDouble("VALOR");
-				java.sql.Date data = rs.getDate("DT_FABRICACAO");
+				int codigo = rs.getInt(1);
+				String nome = rs.getString(2);
+				double valor = rs.getDouble(3);
+				java.sql.Date data = rs.getDate(4);
 				Calendar dataFabricacao = Calendar.getInstance();
 				dataFabricacao.setTimeInMillis(data.getTime());
-				int codigoCategoria = rs.getInt("ID_CATEGORIA");
-				String nomeCategoria = rs.getString("NOME_CATEGORIA");
+				int qtd = rs.getInt(5);
+				int codigoCategoria = rs.getInt(6);
+				String nomeCategoria = rs.getString(7);
 
-				Produto produto = new Produto(nome, valor, dataFabricacao, qtd);
+				Produto produto = new Produto(codigo, nome, valor, dataFabricacao, qtd);
 				Categoria categoria = new Categoria(codigoCategoria, nomeCategoria);
 				produto.setCategoria(categoria);
-				produto.setCodigo(codigo);
 				lista.add(produto);
 			}
 		} catch (SQLException e) {

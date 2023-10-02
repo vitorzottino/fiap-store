@@ -15,8 +15,9 @@ public class Produto {
 		super();
 	}
 
-	public Produto(String nome, double valor, Calendar dataFabricacao, int quantidade) {
+	public Produto(int codigo, String nome, double valor, Calendar dataFabricacao, int quantidade) {
 		super();
+		this.codigo = codigo;
 		this.nome = nome;
 		this.valor = valor;
 		this.dataFabricacao = dataFabricacao;
