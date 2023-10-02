@@ -15,7 +15,7 @@ public class ProdutoDAOTeste {
 		ProdutoDAO dao = DAOFactory.getProdutoDAO();
 
 		// Cadastrar um produto
-		Produto produto = new Produto(0, "Caderno", 20, Calendar.getInstance(), 100);
+		Produto produto = new Produto("TV Samsung", 5000, Calendar.getInstance(), 50);
 		try {
 			dao.cadastrar(produto);
 			System.out.println("Produto cadastrado.");
@@ -23,10 +23,10 @@ public class ProdutoDAOTeste {
 			e.printStackTrace();
 		}
 
-		// Buscar um produto pelo c�digo e atualizar
+		// Buscar um produto pelo código e atualizar
 		produto = dao.buscar(1);
-		produto.setNome("Caderno capa dura");
-		produto.setValor(30);
+		produto.setNome("TV Samsung 65'");
+		produto.setValor(5250);
 		try {
 			dao.atualizar(produto);
 			System.out.println("Produto atualizado.");

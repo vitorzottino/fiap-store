@@ -26,7 +26,7 @@ public class LoginFilter extends HttpFilter implements Filter {
 
 		if (session.getAttribute("user") == null && !url.endsWith("login") && !url.contains("resources")
 				&& !url.contains("home")) {
-			request.setAttribute("erro", "Entre com o usu�rio e senha!");
+			request.setAttribute("erro", "Entre com o usuário e senha!");
 			request.getRequestDispatcher("home.jsp").forward(request, response);
 		} else {
 			chain.doFilter(request, response);

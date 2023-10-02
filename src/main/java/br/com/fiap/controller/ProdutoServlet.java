@@ -110,7 +110,7 @@ public class ProdutoServlet extends HttpServlet {
 			Categoria categoria = new Categoria();
 			categoria.setCodigo(codigoCategoria);
 
-			Produto produto = new Produto(0, nome, preco, fabricacao, quantidade);
+			Produto produto = new Produto(nome, preco, fabricacao, quantidade);
 			produto.setCategoria(categoria);
 
 			dao.cadastrar(produto);
@@ -140,8 +140,9 @@ public class ProdutoServlet extends HttpServlet {
 			Categoria categoria = new Categoria();
 			categoria.setCodigo(codigoCategoria);
 
-			Produto produto = new Produto(codigo, nome, preco, fabricacao, quantidade);
+			Produto produto = new Produto(nome, preco, fabricacao, quantidade);
 			produto.setCategoria(categoria);
+			produto.setCodigo(codigo);
 			dao.atualizar(produto);
 
 			request.setAttribute("msg", "Produto atualizado!");

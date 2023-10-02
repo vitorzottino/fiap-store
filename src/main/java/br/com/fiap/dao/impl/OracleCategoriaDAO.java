@@ -22,13 +22,13 @@ public class OracleCategoriaDAO implements CategoriaDAO {
 		ResultSet rs = null;
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
-			stmt = conexao.prepareStatement("SELECT * FROM TB_CATEGORIA");
+			stmt = conexao.prepareStatement("SELECT * FROM TB_CATEGORIAS");
 			rs = stmt.executeQuery();
 
 			// Percorre todos os registros encontrados
 			while (rs.next()) {
-				int codigo = rs.getInt("CODIGO");
-				String nome = rs.getString("NOME");
+				int codigo = rs.getInt("ID_CATEGORIA");
+				String nome = rs.getString("NOME_CATEGORIA");
 				Categoria categoria = new Categoria(codigo, nome);
 				lista.add(categoria);
 			}
