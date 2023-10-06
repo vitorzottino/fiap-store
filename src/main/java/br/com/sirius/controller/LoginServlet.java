@@ -45,11 +45,13 @@ public class LoginServlet extends HttpServlet {
 				User user = dao.userLogin(email, senha);
 
 				if (user != null) {
-					out.print("Logado");
+					
 					request.getSession().setAttribute("auth", user);
 					response.sendRedirect("index.jsp");
 				} else {
-					out.print("Usuario ou senha incorretos");
+				
+					response.sendRedirect("login.jsp");
+					
 				}
 
 			} catch (ClassNotFoundException | SQLException e) {

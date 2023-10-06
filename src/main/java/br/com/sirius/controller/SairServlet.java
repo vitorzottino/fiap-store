@@ -16,13 +16,6 @@ public class SairServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-
-    public SairServlet() {
-        super();
-        
-    }
-
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try(PrintWriter out = response.getWriter()){
 			if(request.getSession().getAttribute("auth") != null) {

@@ -43,7 +43,7 @@ List<Produto> produtos = dao.listarTodos();
 						<%if(auth != null){%>
 						<a href="adicionar-carrinho?id=<%=p.getId()%>" 
 						class="btn btn-dark ">Adicionar ao carrinho</a> 
-						<a href="#" class="btn btn-primary">Comprar Agora</a>
+						<a href="comprar-agora?quantidade=1&id=<%=p.getId() %>" class="btn btn-primary">Comprar Agora</a>
 						<%}else{%>
 						<a href="login.jsp" 
 						class="btn btn-dark ">Adicionar ao carrinho</a> 

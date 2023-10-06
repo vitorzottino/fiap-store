@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.sirius.model.ItemCarrinho;
 
-@WebServlet("/mais-menos")
+@WebServlet("/alterar-quantidade")
 public class AlterarQuantidadeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<%@include file="includes/IncludeNavbar.jsp" %>
+	<%@include file="includes/IncludeNavbar.jsp"%>
 
 	<div class="container">
 		<div class="card w-50 mx-auto my-5">
@@ -23,22 +23,23 @@
 							name="login-email" placeholder="nome@email.com" required>
 					</div>
 					<div class="form-group">
-						<label>Senha</label> <input type="password" class="form-control"
+						<label>Senha</label> <input type="text" class="form-control"
 							name="login-password" placeholder="******" required>
 					</div>
-					
+
 					<div class="text-center">
+						<span id="error-msg">${erro}</span>
 						<button type="submit" class="btn btn-primary">Login</button>
 					</div>
 
-				
+
 				</form>
-					
+
 			</div>
 		</div>
 	</div>
 
-
+	
 
 
 	<%@include file="includes/footer.jsp"%>

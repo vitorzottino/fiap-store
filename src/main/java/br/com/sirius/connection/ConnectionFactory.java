@@ -5,7 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-	
+	//RM93345
+	//071103
 	private static Connection connection = null;
 
 
@@ -23,7 +24,7 @@ public class ConnectionFactory {
 		if (connection == null) {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			connection = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL", "rm93360", "100903");
-			System.out.println("connected");
+			
 		}
 		return connection;
 	}
