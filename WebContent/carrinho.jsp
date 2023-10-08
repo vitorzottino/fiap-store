@@ -24,7 +24,7 @@
 				<tr>
 					<th scope="col">Nome</th>
 					<th scope="col">Categoria
-					<th scope="col">Preço</th>
+					<th scope="col">Preco</th>
 					<th scope="col">Comprar Agora</th>
 					<th scope="col">Cancelar</th>
 				</tr>

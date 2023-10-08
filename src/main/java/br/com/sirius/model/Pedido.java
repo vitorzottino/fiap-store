@@ -38,7 +38,7 @@ public class Pedido extends Produto {
 	public String getData() {
 		return data;
 	}
-
+   
 	public void setData(String data) {
 		this.data = data;
 	}
@@ -46,7 +46,7 @@ public class Pedido extends Produto {
 	@Override
 	public String toString() {
 		return "Pedido [idPedido=" + idPedido + ", idUser=" + idUser + ", quantidade=" + quantidade + ", data=" + data
-				+ "]";
+				+ "Nome produto= " + this.getNome()  +"]";
 	}
 
 }

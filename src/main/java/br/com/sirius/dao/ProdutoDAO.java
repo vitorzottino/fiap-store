@@ -77,6 +77,32 @@ public class ProdutoDAO {
 		return produtos;
 
 	}
+	
+	public Produto getProduto(int id) {
+		Produto produto = new  Produto();
+		
+		try {
+			
+			query="select * from tb_produtos_ss where id=?";
+			stmt = this.con.prepareStatement(query);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			//ERRO NESSA LINHA ID ESTA ERRADO !!!
+			while(rs.next()) {
+			produto.setId(rs.getInt("id"));
+			produto.setNome(rs.getString("nome"));
+			produto.setCategoria(rs.getString("categoria"));
+			produto.setPreco(rs.getDouble("preco"));
+			produto.setImg(rs.getString("img"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return produto;
+		
+	}
 
 	public double getValor(ArrayList<ItemCarrinho> carrinho) {
 
