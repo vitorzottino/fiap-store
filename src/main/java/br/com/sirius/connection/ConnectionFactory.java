@@ -5,8 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-	//RM93345
-	//071103
+	
 	private static Connection connection = null;
 
 
@@ -14,7 +13,7 @@ public class ConnectionFactory {
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			return DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL", "rm93360", "100903");
+			return DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL", "", "");
 		} catch (SQLException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
