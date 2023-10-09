@@ -17,7 +17,7 @@
 	<div class="container">
 		<div class="d-flex py-3">
 			<h3>Valor Final: R$${0+valor}</h3>
-			<a class="mx-3 btn btn-primary" href="finalizar-pedido">Finalizar Pedido</a>
+			<a class="mx-3 btn btn-success" href="finalizar-pedido">Finalizar Pedido</a>
 		</div>
 		<table class="table table-light">
 			<thead>

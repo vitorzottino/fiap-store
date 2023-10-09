@@ -21,15 +21,15 @@ List<Produto> produtos = dao.listarTodos();
 	<%@include file="includes/IncludeNavbar.jsp"%>
 
 	<div class="container">
-		<div class="card-header my-3">Produtos</div>
+		<div class="card-header my-3" style= "font-weight: 600; font-size: 1.25rem;">Produtos</div>
 		<div class="row">
 			<%
 			if (!produtos.isEmpty()) {
 				for (Produto p : produtos) {
 			%>
 			<div class="col-md-3 my-3">
-				<div class="card w-100" style="width: 18rem;">
-					<img class="card-img-top object-fit: cover;" src="img/<%=p.getImg() %>"
+				<div class="card w-100 h-100" style="width: 18rem;">
+					<img class="card-img-top"  style="width: 100%; height: 200px; display: flex; align-itens:center; object-fit: cover; " src="img/<%=p.getImg() %>"
 						alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title"><%=p.getNome()%></h5>
@@ -43,11 +43,11 @@ List<Produto> produtos = dao.listarTodos();
 						<%if(auth != null){%>
 						<a href="adicionar-carrinho?id=<%=p.getId()%>" 
 						class="btn btn-dark ">Adicionar ao carrinho</a> 
-						<a href="comprar-agora?quantidade=1&id=<%=p.getId() %>" class="btn btn-primary">Comprar Agora</a>
+						<a href="comprar-agora?quantidade=1&id=<%=p.getId() %>" class="btn btn-success">Comprar Agora</a>
 						<%}else{%>
 						<a href="login.jsp" 
 						class="btn btn-dark ">Adicionar ao carrinho</a> 
-						<a href="login.jsp" class="btn btn-primary">Comprar Agora</a>
+						<a href="login.jsp" class="btn btn-success">Comprar Agora</a>
 						<%}%>
 						
 						</div>
