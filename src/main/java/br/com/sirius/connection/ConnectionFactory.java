@@ -20,13 +20,6 @@ public class ConnectionFactory {
 		}
 	}
 	
-	public static Connection getConnection() throws ClassNotFoundException, SQLException{
-		if (connection == null) {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			connection = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL", "rm93360", "100903");
-			
-		}
-		return connection;
-	}
+	
 
 }

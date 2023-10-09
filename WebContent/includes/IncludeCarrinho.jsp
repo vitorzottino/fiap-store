@@ -6,7 +6,7 @@
 	ArrayList<ItemCarrinho> carrinho = (ArrayList)session.getAttribute("lista-carrinho");
 	List<ItemCarrinho> lc = null;
 	if(carrinho != null){
-		ProdutoDAO dao = new ProdutoDAO(ConnectionFactory.getConnection());
+		ProdutoDAO dao = new ProdutoDAO(ConnectionFactory.conectar());
 		lc = dao.listarCarrinho(carrinho);
 		double valor = dao.getValor(carrinho);
 		request.setAttribute("carrinho", carrinho);

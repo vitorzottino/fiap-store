@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 
 			try {
 				
-				UserDAO dao = new UserDAO(ConnectionFactory.getConnection());
+				UserDAO dao = new UserDAO(ConnectionFactory.conectar());
 				User user = dao.userLogin(email, senha);
 
 				if (user != null) {
@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 					
 				}
 
-			} catch (ClassNotFoundException | SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
